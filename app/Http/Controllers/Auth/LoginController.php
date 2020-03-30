@@ -29,15 +29,7 @@ class LoginController extends Controller
      * @var string
      *
      */
-
-
-    protected function redirectTo()
-    {
-        if (auth()->user()->unconfirmed == 3) {
-            return RouteServiceProvider::PROFESSOR;
-        }
-        return RouteServiceProvider::HOME;
-    }
+    protected $redirectTo = RouteServiceProvider::HOME;
 
 
     

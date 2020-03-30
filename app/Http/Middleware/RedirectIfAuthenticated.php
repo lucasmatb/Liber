@@ -23,6 +23,11 @@ class RedirectIfAuthenticated
                 return redirect()->route('admin.dashboard');
             return redirect(RouteServiceProvider::HOME);
         }
+        if (Auth::guard($guard)->check()) {
+            if($guard == 'professor')
+                return redirect()->route('professor.dashboard');
+            return redirect(RouteServiceProvider::HOMEPROFESSOR);
+        }
 
         return $next($request);
     }
