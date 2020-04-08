@@ -132,16 +132,9 @@ return [
             'throttle' => 60,
         ],
 
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-
         'professores' => [
             'provider' => 'professores',
-            'table' => 'password_resets',
+            'table' => 'professor_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
