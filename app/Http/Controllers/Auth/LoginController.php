@@ -32,8 +32,19 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
 
-    
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
 
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    public function protectLogout(Request $request)
+    {
+        return abort(404);
+    }
     /**
      * Create a new controller instance.
      *
