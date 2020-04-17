@@ -27,9 +27,13 @@ Route::get('/logout', 'Auth\LoginController@protectLogout')->name('protect.logou
 
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
-    Route::get('/admin/login', 'Auth\AdminLoginController@index')->name('admin.login');
+    Route::get('/admin', 'AdminController@index')->name('admin.index');
+    Route::get('/admin/deletado', 'AdminController@indexDeletado')->name('admin.index.deletado');
+    Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+    Route::get('admin/{id}', 'AdminController@update')->name('admin.update');
+    Route::get('admin/deletado/{id}', 'AdminController@updateDeletado')->name('admin.update.deletado');
 });
 
 Route::group(['middleware' => 'professor'], function () {

@@ -72,8 +72,8 @@
                     @else
                         <a href="{{ route('login') }}">Aluno</a>
                         <a href="{{ url('/professor') }}">Professor</a>
-                    @endauth
                 </div>
+                @endauth
             @endif
             <div class="content">
                 <div class="title m-b-md">
