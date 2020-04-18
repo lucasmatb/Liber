@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-    <link rel = "stylesheet"  href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css"  integridade = "SHA384-ggOyR0iXCbMQv3Xipma34MD + DH / 1fQ784 / j6cY / iJTQUOhcWr7x9JvoRxT2MZw1T"  crossorigin = "anônimo" >
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title>Liber</title>
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="floating-labels.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
-   
- 
-    <style>
-        #perfilImgAluno{
-            display: none;
-        }
-    </style>
-   
-    
-</head>
-<body>
-  @extends('layouts.app')
+@extends('layouts.app')
 
   @section('content')
   <title>{{ config('app.name', 'Liber') }}</title>

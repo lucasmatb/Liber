@@ -42,7 +42,6 @@ Route::group(['middleware' => 'professor'], function () {
     Route::get('/professor/login', 'Auth\ProfessorLoginController@showLoginForm')->name('professor.login');
     Route::get('/professor/register', 'Auth\ProfessorRegisterController@showProfessorRegisterForm')->name('professor.register');
     Route::post('/professor/register', 'Auth\ProfessorRegisterController@register');
-    Route::post('/professor/register/logout', 'Auth\ProfessorLoginController@logout')->name('professor.logout');
 
     Route::get('/professor/criacao', 'CriarSessaoController@index')->name('teladecriacao');
     Route::post('/professor/criacao', 'CriarSessaoController@store')->name('teladecriacao.submit');
