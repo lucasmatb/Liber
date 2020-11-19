@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class ProfessorRegisterController extends Controller
 {
@@ -38,9 +40,12 @@ class ProfessorRegisterController extends Controller
         $this->validator($request->all())->validate();
     
         event(new Registered($professor = $this->create($request->all())));
-    
-        return $this->registered($request, $professor)
-          ?: redirect($this->redirectPath());
+
+        //session()->flash('success', 'Your message');
+        //return $this->registered($request, $professor)
+         //?: redirect($this->redirectPath());
+         //return Redirect::to("/professor/login")->withSuccess('Seu registro foi enviado com sucesso e será analisado pelos administradores.');
+         return redirect(route('professor.login'))->with('success', 'Seu registro foi enviado com sucesso e será analisado pelos administradores.');
     }
     /**
      * Create a new controller instance.
@@ -49,7 +54,7 @@ class ProfessorRegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:professor');
+        $this->middleware('guest');
     }
 
     /**
@@ -62,9 +67,9 @@ class ProfessorRegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'sobrenome' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:professores'],
-            'password' => ['required', 'string', 'min:2', 'confirmed'],
-            'escola' => ['required', 'string', 'min:2'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -77,9 +82,9 @@ class ProfessorRegisterController extends Controller
     protected function create(array $data){
             Professor::create([
                 'name' => $data['name'],
+                'sobrenome' => $data['sobrenome'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'escola' => $data['escola'],
                 'unconfirmed' => 1]);
             }
 
@@ -96,6 +101,7 @@ class ProfessorRegisterController extends Controller
     
             return property_exists($this, 'redirectTo') ? $this->redirectTo : '/professor';
         }
+
     }
     
     

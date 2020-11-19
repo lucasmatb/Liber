@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sessao extends Model
 {
 
-    protected $table = 'sessoes';
+    protected $table = 'sessao';
 
     /**
      * The attributes that are mass assignable.
@@ -15,15 +15,7 @@ class Sessao extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'nome', 'codigoDeAcesso', 'dataDeEncerramento',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'remember_token',
-    ];
 }

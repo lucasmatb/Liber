@@ -20,10 +20,9 @@ class AdminController extends Controller
      */
     public function index() {
 
-        $professor = Professor::select('id', 'name', 'email')->where('unconfirmed', 1)->latest()->paginate(10);
+        $professor = Professor::select('id', 'name',  'sobrenome', 'email')->where('unconfirmed', 1)->latest()->paginate();
 
-        return view('admin',compact('professor'))
-        ->with('i', (request()->input('page', 1) - 1) * 10);
+        return view('admin.admin',compact('professor'));
     }
 
     public function update(Request $request, Professor $professor)
@@ -44,10 +43,9 @@ class AdminController extends Controller
 
     public function indexDeletado() {
 
-        $professorDeletado = Professor::select('id', 'name', 'email')->where('unconfirmed', 10)->latest()->paginate(10);
+        $professorDeletado = Professor::select('id', 'name', 'sobrenome', 'email')->where('unconfirmed', 10)->latest()->paginate();
 
-        return view('adminDeletado',compact('professorDeletado'))
-        ->with('i', (request()->input('page', 1) - 1) * 10);
+        return view('admin.adminDeletado',compact('professorDeletado'));
     }
 
     public function updateDeletado(Request $request, Professor $professor)
@@ -57,14 +55,18 @@ class AdminController extends Controller
             $update = DB::update('update professores set unconfirmed = 5 where id = ?', [$professor]);
             return redirect()->route('admin.index.deletado');
         }
-        if($request->has('Deleto') == true){
+        if($request->has('Delete') == true){
             $professor = $request->id;
             $update = DB::delete('delete from professores where id = ?', [$professor]);
             return redirect()->route('admin.index.deletado');
         }
+    }
+    public function deletarTodos(Request $request, Professor $professor)
+    {        
         if($request->has('Deleta') == true){
-            $update = DB::delete('delete from professores where unconfirmed = 10');
-            return redirect()->route('admin.index.deletado');
+        Professor::where('unconfirmed', '=', 10)->delete();
+        return redirect()->back()->with('success','Todos os professores foram excluídos.');
         }
+            
     }
 }

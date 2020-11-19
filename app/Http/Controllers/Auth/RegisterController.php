@@ -37,9 +37,8 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
     
         event(new Registered($user = $this->create($request->all())));
-    
-        return $this->registered($request, $user)
-          ?: redirect($this->redirectPath(RouteServiceProvider::HOME));
+
+        return redirect(route('login'))->with('success', 'Seu registro foi efetuado com sucesso!');
     }
 
     /**
@@ -62,9 +61,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'sobrenome' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:2', 'confirmed'],
-            'escola' => ['required', 'string', 'min:2'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -77,9 +76,9 @@ class RegisterController extends Controller
     protected function create(array $data){
             User::create([
                 'name' => $data['name'],
+                'sobrenome' => $data['sobrenome'],
                 'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'escola' => $data['escola']]);
+                'password' => Hash::make($data['password'])]);
             }
     
 }

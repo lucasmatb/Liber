@@ -15,7 +15,7 @@ class AdminLoginController extends Controller
     use AuthenticatesUsers;
 
     public function __construct(){
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function showLoginForm()
@@ -41,4 +41,13 @@ class AdminLoginController extends Controller
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/admin';
     }
+
+    public function logout(Request $request)
+{
+    $this->guard()->logout();
+
+    $request->session()->invalidate();
+
+    return $this->loggedOut($request) ?: redirect('/admin');
+}
 }

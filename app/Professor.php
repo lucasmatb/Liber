@@ -21,7 +21,7 @@ class Professor extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'escola', 'unconfirmed',
+        'name', 'sobrenome', 'email', 'password', 'unconfirmed', 'avatar'
     ];
 
     /**
@@ -46,4 +46,5 @@ class Professor extends Authenticatable
     {
         $this->notify(new ProfessorResetPassword($token));
     }
+
 }
